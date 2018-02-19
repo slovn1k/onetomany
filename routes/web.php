@@ -11,6 +11,18 @@
 |
 */
 
+use App\User;
+use App\Posts;
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::get('/create_post/{id}', function($id) {
+   $user = User::findOrFail($id);
+
+   $post = Posts::create(['title'=>'New Post', 'body'=>'New body']);
+
+   $user->$post()->save();
 });
